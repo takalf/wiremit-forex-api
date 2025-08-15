@@ -30,8 +30,8 @@ A comprehensive Forex trading API built with Spring Boot, providing real-time ex
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/wiremit-forex.git
-   cd wiremit-forex
+   git clone https://github.com/takalf/wiremit-forex-api.git
+   cd wiremit-forex-api
    ```
 
 2. **Setup MySQL database**
