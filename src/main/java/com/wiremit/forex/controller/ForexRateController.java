@@ -45,6 +45,7 @@ public class ForexRateController {
     }
 
     @GetMapping("/latest/{pairCode}")
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get latest rate by pair code", description = "Retrieves the most recent exchange rate for a specific currency pair using pair code (e.g., USDEUR)")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Latest rate retrieved successfully"),
@@ -59,6 +60,7 @@ public class ForexRateController {
     }
 
     @GetMapping("/latest/{baseCurrency}/{targetCurrency}")
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get latest rate by currencies", description = "Retrieves the most recent exchange rate between two specific currencies")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Latest rate retrieved successfully"),
@@ -75,6 +77,7 @@ public class ForexRateController {
     }
 
     @PostMapping("/latest/batch")
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get latest rates for multiple pairs", description = "Retrieves the most recent exchange rates for multiple currency pairs in a single request")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Batch rates retrieved successfully"),
@@ -89,6 +92,7 @@ public class ForexRateController {
     }
 
     @GetMapping("/history/{pairCode}")
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get rate history", description = "Retrieves historical exchange rates for a specific currency pair")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Rate history retrieved successfully"),

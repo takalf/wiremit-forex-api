@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ public class CurrencyPairController {
     private final CurrencyPairService currencyPairService;
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get all currency pairs", description = "Retrieves all currency pairs from the system")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Currency pairs retrieved successfully"),
@@ -36,6 +38,7 @@ public class CurrencyPairController {
     }
 
     @GetMapping("/active")
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get active currency pairs", description = "Retrieves only the currently active currency pairs")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Active currency pairs retrieved successfully"),
@@ -46,6 +49,7 @@ public class CurrencyPairController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     @Operation(summary = "Get currency pair by ID", description = "Retrieves a specific currency pair by its unique identifier")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Currency pair found"),
@@ -60,6 +64,7 @@ public class CurrencyPairController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create new currency pair", description = "Creates a new currency pair in the system")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Currency pair created successfully"),
@@ -74,6 +79,7 @@ public class CurrencyPairController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update currency pair", description = "Updates an existing currency pair with new information")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Currency pair updated successfully"),
@@ -90,6 +96,7 @@ public class CurrencyPairController {
     }
 
     @PatchMapping("/{id}/activate")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Activate currency pair", description = "Sets the specified currency pair status to active")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Currency pair activated successfully"),
@@ -104,6 +111,7 @@ public class CurrencyPairController {
     }
 
     @PatchMapping("/{id}/deactivate")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Deactivate currency pair", description = "Sets the specified currency pair status to inactive")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Currency pair deactivated successfully"),
@@ -118,6 +126,7 @@ public class CurrencyPairController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Delete currency pair", description = "Permanently removes a currency pair from the system")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Currency pair deleted successfully"),
